@@ -70,6 +70,10 @@ class SurveyController extends Controller
 		if(isset($_POST['Survey']))
 		{
 			$model->attributes=$_POST['Survey'];
+                        $model->userId = Yii::app()->user->id;
+                        $model->status = Survey::STATUS_CREATED;
+                        $model->creationDate = new CDbExpression('NOW()');
+                        
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -90,9 +94,13 @@ class SurveyController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Survey']))
+                if(isset($_POST['Survey']))
 		{
+                        if ($model->status == Survey::STATUS_CREATED && 
+                                isset($_POST['Survey']['status']) && 
+                                $_POST['Survey']['status'] == Survey::STATUS_PUBLISHED)
+                            $model->publishDate = new CDbExpression ('NOW()');
+                        
 			$model->attributes=$_POST['Survey'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));

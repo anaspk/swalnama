@@ -22,6 +22,12 @@
  */
 class Survey extends CActiveRecord
 {
+        const STATUS_CREATED = 0;
+        const STATUS_PUBLISHED = 1;
+        
+        const PRIVACY_PUBLIC = 0;
+        const PRIVACY_REGISTERED = 1;
+        const PRIVACY_INVITED = 2;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -130,5 +136,36 @@ class Survey extends CActiveRecord
             $response->save();
             
             return $response;
+        }
+        
+        public function getStatusOptions()
+        {
+            return array(
+                self::STATUS_CREATED => 'Draft',
+                self::STATUS_PUBLISHED => 'Published',
+            );
+        }
+        
+        public function getStatusText()
+        {
+            $statusOptions = $this->statusOptions;
+            return ( isset($statusOptions[$this->status]) ? 
+                $statusOptions[$this->status] : "Unknown status code {$this->status}" );
+        }
+        
+        public function getPrivacyOptions()
+        {
+            return array(
+                self::PRIVACY_PUBLIC => 'Anyone can find survey and participate in it',
+                self::PRIVACY_REGISTERED => 'Any registered user can participate',
+                self::PRIVACY_INVITED =>'Only invited registered users can participate',
+            );
+        }
+        
+        public function getPrivacyText()
+        {
+            $privacyOptions = $this->privacyOptions;
+            return ( isset($privacyOptions[$this->privacyLevel]) ?
+                    $privacyOptions[$this->privacyLevel] : "Unknown privacy level code {$this->privacyLevel}");
         }
 }

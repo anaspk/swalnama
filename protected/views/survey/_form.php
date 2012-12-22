@@ -1,84 +1,38 @@
 <?php
 /* @var $this SurveyController */
 /* @var $model Survey */
-/* @var $form CActiveForm */
+/* @var $form TbActiveForm */
 ?>
 
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'survey-form',
-	'enableAjaxValidation'=>false,
+	'type'=>'horizontal',
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'userId'); ?>
-		<?php echo $form->textField($model,'userId'); ?>
-		<?php echo $form->error($model,'userId'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'surveyName'); ?>
-		<?php echo $form->textField($model,'surveyName',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'surveyName'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'surveyDescription'); ?>
-		<?php echo $form->textField($model,'surveyDescription',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'surveyDescription'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'welcomeMessage'); ?>
-		<?php echo $form->textArea($model,'welcomeMessage',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'welcomeMessage'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'goodbyeMessage'); ?>
-		<?php echo $form->textArea($model,'goodbyeMessage',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'goodbyeMessage'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'privacyLevel'); ?>
-		<?php echo $form->textField($model,'privacyLevel'); ?>
-		<?php echo $form->error($model,'privacyLevel'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'creationDate'); ?>
-		<?php echo $form->textField($model,'creationDate'); ?>
-		<?php echo $form->error($model,'creationDate'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'publishDate'); ?>
-		<?php echo $form->textField($model,'publishDate'); ?>
-		<?php echo $form->error($model,'publishDate'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'endDate'); ?>
-		<?php echo $form->textField($model,'endDate'); ?>
-		<?php echo $form->error($model,'endDate'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
+<?php echo $form->textFieldRow($model, 'surveyName', array('maxlength'=>45)); ?>
+<?php echo $form->textAreaRow($model, 'surveyDescription', array('class'=>'span12', 'rows'=>4, 'maxlength'=>255)); ?>
+<?php echo $form->html5EditorRow($model, 'welcomeMessage', array('height'=>'200px')); ?>
+<?php echo $form->html5EditorRow($model, 'goodbyeMessage', array('height'=>'200px')); ?>
+<?php echo $form->dropDownListRow($model, 'privacyLevel', $model->privacyOptions, array(
+    'class' => 'span6',
+)); ?>
+<?php
+if ( !$model->isNewRecord )
+    echo $form->dropDownListRow($model, 'status', $model->statusOptions, array(
+        'disabled' => count($model->questions) == 0,
+    )); 
+?>
+<?php echo $form->datepickerRow($model, 'endDate', array(
+    'append' => '<i class="icon-calendar"></i>',
+    'options' => array( 'format' => 'yyyy-mm-dd' ),
+)); ?>
+<div class="form-actions">
+    <?php $this->widget( 'bootstrap.widgets.TbButton', array( 
+            'buttonType' => 'submit',
+            'type' => 'primary',
+            'label' => $model->isNewRecord ? 'Create' : 'Update',
+            ) ); ?>
+</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- form -->

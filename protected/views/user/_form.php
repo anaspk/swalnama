@@ -6,7 +6,7 @@
 
 <?php
     $form = $this->beginWidget( 'bootstrap.widgets.TbActiveForm', array(
-        'id' => 'userForm',
+        'id' => 'user-form',
         'type' => 'horizontal',
     ) );
 ?>
@@ -26,7 +26,7 @@
         <?php $this->widget( 'bootstrap.widgets.TbButton', array( 
             'buttonType' => 'submit',
             'type' => 'primary',
-            'label' => 'Create',
+            'label' => $model->isNewRecord ? 'Create' : 'Update',
             ) ); ?>
 </div>
 
