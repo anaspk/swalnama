@@ -86,8 +86,8 @@ class Survey extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'userId' => 'User',
-			'surveyName' => 'Survey Name',
-			'surveyDescription' => 'Survey Description',
+			'surveyName' => 'Name',
+			'surveyDescription' => 'Description',
 			'welcomeMessage' => 'Welcome Message',
 			'goodbyeMessage' => 'Goodbye Message',
 			'status' => 'Status',
@@ -95,6 +95,8 @@ class Survey extends CActiveRecord
 			'creationDate' => 'Creation Date',
 			'publishDate' => 'Publish Date',
 			'endDate' => 'End Date',
+                        'statusText' => 'Status',
+                        'privacyText' => 'Privacy Level',
 		);
 	}
 
@@ -150,7 +152,7 @@ class Survey extends CActiveRecord
         {
             $statusOptions = $this->statusOptions;
             return ( isset($statusOptions[$this->status]) ? 
-                $statusOptions[$this->status] : "Unknown status code {$this->status}" );
+                $statusOptions[$this->status] : '' );
         }
         
         public function getPrivacyOptions()
@@ -166,6 +168,6 @@ class Survey extends CActiveRecord
         {
             $privacyOptions = $this->privacyOptions;
             return ( isset($privacyOptions[$this->privacyLevel]) ?
-                    $privacyOptions[$this->privacyLevel] : "Unknown privacy level code {$this->privacyLevel}");
+                    $privacyOptions[$this->privacyLevel] : '');
         }
 }

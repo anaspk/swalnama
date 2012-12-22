@@ -130,9 +130,12 @@ class SurveyController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Survey');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		$model = new Survey('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Survey']))
+			$model->attributes=$_GET['Survey'];
+                $this->render('index',array(
+			'model'=>$model,
 		));
 	}
 

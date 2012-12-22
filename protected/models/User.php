@@ -85,10 +85,13 @@ class User extends CActiveRecord
 			'password' => 'Password',
 			'firstName' => 'First Name',
 			'lastName' => 'Last Name',
+                        'fullName' => 'Full Name',
 			'emailAddress' => 'Email Address',
-			'dateOfBirth' => 'Date Of Birth',
+			'dateOfBirth' => 'Date of Birth',
 			'gender' => 'Gender',
 			'country' => 'Country',
+                        'genderText' => 'Gender',
+                        'countryText' => 'Country',
 		);
 	}
 
@@ -118,17 +121,31 @@ class User extends CActiveRecord
 		));
 	}
         
+        public function getFullName()
+        {
+            return $this->firstName . ' ' . $this->lastName;
+        }
+        
         public function getGenderOptions()
         {
             return array(
+                0=>'Please select',
                 self::GENDER_MALE=>'Male',
                 self::GENDER_FEMALE=>'Female',
             );
         }
         
+        public function getGenderText()
+        {
+            $genderOptions = $this->genderOptions;
+            return ( ( isset($this->gender) && isset($genderOptions[$this->gender]) && $this->gender != 0 ) ? 
+                    $genderOptions[$this->gender] : '' );
+        }
+        
         public function getCountries()
         {
             return array(
+                0=>'Please select',
                 1=>'Afghanistan', 2=>'Akrotiri', 3=>'Albania', 4=>'Algeria',
                 5=>'American Samoa', 6=>'Andorra', 7=>'Angola', 8=>'Anguilla', 
                 9=>'Antarctica', 10=>'Antigua and Barbuda', 11=>'Argentina',
@@ -195,5 +212,12 @@ class User extends CActiveRecord
                 249=>'Vietnam', 250=>'Virgin Islands', 251=>'Wake Island', 252=>'Wallis and Futuna',
                 253=>'West Bank', 254=>'Western Sahara', 255=>'Yemen', 256=>'Zambia', 257=>'Zimbabwe',
             );
+        }
+        
+        public function getCountryText()
+        {
+            $countries = $this->countries;
+            return ( (isset($this->country) && isset($countries[$this->country]) && $this->country != 0 ) ?
+                $countries[$this->country] : '' );
         }
 }

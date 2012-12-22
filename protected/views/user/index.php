@@ -1,6 +1,6 @@
 <?php
 /* @var $this UserController */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $model User */
 
 $this->breadcrumbs=array(
 	'Users',
@@ -26,7 +26,7 @@ $this->menu=array(
             'firstName',
             'lastName',
             array(
-                'header' => Yii::t('ses', 'View'),
+                'header' => Yii::t('ses', 'Administer'),
                 'class' => 'bootstrap.widgets.TbButtonColumn',
                 'template' => '{view} {update} {delete}',
             ),
