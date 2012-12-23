@@ -20,7 +20,7 @@
     if ( Yii::app()->user->isGuest )
     {
         $navbarRightEntries['items'] = array(
-                    array('label'=>'Sign Up', 'url'=>CHtml::normalizeUrl(array('site/signup'))),
+                    array('label'=>'Sign Up', 'url'=>CHtml::normalizeUrl(array('user/signup'))),
                     array('label'=>'Login', 'url'=>CHtml::normalizeUrl(array('site/login'))),
             );
     }

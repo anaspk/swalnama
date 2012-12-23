@@ -1,26 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "tbl_question".
+ * This is the model class for table "tbl_option".
  *
- * The followings are the available columns in table 'tbl_question':
+ * The followings are the available columns in table 'tbl_option':
  * @property integer $id
- * @property integer $surveyId
- * @property string $statement
- * @property integer $questionType
- * @property integer $multipleChoiceAllowed
- * @property integer $isCompusory
+ * @property integer $questionId
+ * @property string $optionStatement
  *
  * The followings are the available model relations:
- * @property Answer[] $answers
- * @property Survey $survey
+ * @property Question $question
  */
-class Question extends CActiveRecord
+class Option extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Question the static model class
+	 * @return Option the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -32,7 +28,7 @@ class Question extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_question';
+		return 'tbl_option';
 	}
 
 	/**
@@ -43,12 +39,12 @@ class Question extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('surveyId, statement, questionType, multipleChoiceAllowed, isCompusory', 'required'),
-			array('surveyId, questionType, multipleChoiceAllowed, isCompusory', 'numerical', 'integerOnly'=>true),
-			array('statement', 'length', 'max'=>255),
+			array('questionId, optionStatement', 'required'),
+			array('questionId', 'numerical', 'integerOnly'=>true),
+			array('optionStatement', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, surveyId, statement, questionType, multipleChoiceAllowed, isCompusory', 'safe', 'on'=>'search'),
+			array('id, questionId, optionStatement', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,9 +56,7 @@ class Question extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                        'options' => array(self::HAS_MANY, 'Option', 'questionId'),
-			'answers' => array(self::HAS_MANY, 'Answer', 'questionId'),
-			'survey' => array(self::BELONGS_TO, 'Survey', 'surveyId'),
+			'question' => array(self::BELONGS_TO, 'Question', 'questionId'),
 		);
 	}
 
@@ -73,11 +67,8 @@ class Question extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'surveyId' => 'Survey',
-			'statement' => 'Statement',
-			'questionType' => 'Question Type',
-			'multipleChoiceAllowed' => 'Multiple Choice Allowed',
-			'isCompusory' => 'Is Compusory',
+			'questionId' => 'Question',
+			'optionStatement' => 'Option Statement',
 		);
 	}
 
@@ -93,11 +84,8 @@ class Question extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('surveyId',$this->surveyId);
-		$criteria->compare('statement',$this->statement,true);
-		$criteria->compare('questionType',$this->questionType);
-		$criteria->compare('multipleChoiceAllowed',$this->multipleChoiceAllowed);
-		$criteria->compare('isCompusory',$this->isCompusory);
+		$criteria->compare('questionId',$this->questionId);
+		$criteria->compare('optionStatement',$this->optionStatement,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
