@@ -1,3 +1,7 @@
+# yii specific folders to ignore
+assets/
+protected/runtime/
+themes/classic/views/
 #################
 ## Eclipse
 #################
