@@ -10,6 +10,9 @@
 )); ?>
 
 <p class="note">Fields with <span class="required">*</span> are required.</p>
+
+<?php echo $form->errorSummary($model); ?>
+
 <?php echo $form->textFieldRow($model, 'surveyName', array('maxlength'=>45)); ?>
 <?php echo $form->textAreaRow($model, 'surveyDescription', array('class'=>'span12', 'rows'=>4, 'maxlength'=>255)); ?>
 <?php echo $form->html5EditorRow($model, 'welcomeMessage', array('height'=>'200px')); ?>

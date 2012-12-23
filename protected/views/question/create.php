@@ -3,8 +3,8 @@
 /* @var $model Question */
 
 $this->breadcrumbs=array(
-	'Questions'=>array('index'),
-	'Create',
+	$model->survey->surveyName => array('survey/view', 'id'=>$model->survey->id),
+	'Add New Question',
 );
 
 $this->menu=array(
@@ -14,6 +14,6 @@ $this->menu=array(
 ?>
 
 <h1>Survey - <?php echo $model->survey->surveyName; ?></h1>
-<h1>Add New Question</h1>
+<h2>Add New Question</h2>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -3,8 +3,8 @@
 /* @var $model Question */
 
 $this->breadcrumbs=array(
-	'Questions'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
+	$model->survey->surveyName => array('survey/view', 'id' => $model->survey->id),
+	$model->statement=>array('view','id'=>$model->id),
 	'Update',
 );
 
@@ -16,6 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Question <?php echo $model->id; ?></h1>
+<h1>Update Question</h1>
+<h2><?php echo $model->statement; ?></h2>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

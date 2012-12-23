@@ -11,6 +11,9 @@
     ) );
 ?>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
+
+<?php echo $form->errorSummary($model); ?>
+
 <?php echo $form->textFieldRow( $model, 'username'); ?>
 <?php echo $form->passwordFieldRow( $model, 'password'); ?>
 <?php echo $form->textFieldRow( $model, 'firstName'); ?>

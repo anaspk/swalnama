@@ -26,6 +26,6 @@ $this->menu=array(
 		'statement',
 		'questionType',
 		'multipleChoiceAllowed',
-		'isCompusory',
+		'isCompulsory',
 	),
 )); ?>

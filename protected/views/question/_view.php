@@ -25,8 +25,8 @@
 	<?php echo CHtml::encode($data->multipleChoiceAllowed); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('isCompusory')); ?>:</b>
-	<?php echo CHtml::encode($data->isCompusory); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('isCompulsory')); ?>:</b>
+	<?php echo CHtml::encode($data->isCompulsory); ?>
 	<br />
 
 

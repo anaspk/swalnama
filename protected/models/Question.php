@@ -9,14 +9,17 @@
  * @property string $statement
  * @property integer $questionType
  * @property integer $multipleChoiceAllowed
- * @property integer $isCompusory
+ * @property integer $isCompulsory
  *
  * The followings are the available model relations:
+ * @property Option[] $options
  * @property Answer[] $answers
  * @property Survey $survey
  */
 class Question extends CActiveRecord
 {
+        const TYPE_MULTIPLE = 1;
+        const TYPE_FREEANSWER = 2;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -43,12 +46,12 @@ class Question extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('surveyId, statement, questionType, multipleChoiceAllowed, isCompusory', 'required'),
-			array('surveyId, questionType, multipleChoiceAllowed, isCompusory', 'numerical', 'integerOnly'=>true),
+			array('surveyId, statement, questionType, isCompulsory', 'required'),
+			array('surveyId, questionType, multipleChoiceAllowed, isCompulsory', 'numerical', 'integerOnly'=>true),
 			array('statement', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, surveyId, statement, questionType, multipleChoiceAllowed, isCompusory', 'safe', 'on'=>'search'),
+			array('id, surveyId, statement, questionType, multipleChoiceAllowed, isCompulsory', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,10 +77,12 @@ class Question extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'surveyId' => 'Survey',
-			'statement' => 'Statement',
+			'statement' => 'Question Statement',
 			'questionType' => 'Question Type',
-			'multipleChoiceAllowed' => 'Multiple Choice Allowed',
-			'isCompusory' => 'Is Compusory',
+                        'questionTypeText' => 'Question Type',
+			'multipleChoiceAllowed' => 'Allow Multiple Answers?',
+			'isCompulsory' => 'Is Compulsory?',
+                        'isCompulsoryText' => 'Is Compulsory?'
 		);
 	}
 
@@ -97,10 +102,34 @@ class Question extends CActiveRecord
 		$criteria->compare('statement',$this->statement,true);
 		$criteria->compare('questionType',$this->questionType);
 		$criteria->compare('multipleChoiceAllowed',$this->multipleChoiceAllowed);
-		$criteria->compare('isCompusory',$this->isCompusory);
+		$criteria->compare('isCompulsory',$this->isCompulsory);
+                $criteria->condition = 'surveyId=:survey_id';
+                $criteria->params = array( ':survey_id' => $this->surveyId );
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getQuestionTypes()
+        {
+            return array(
+                self::TYPE_MULTIPLE => 'Multiple Choice Question',
+                self::TYPE_FREEANSWER => 'Free Answer',
+            );
+        }
+        
+        public function getQuestionTypeText()
+        {
+            $questionTypes = $this->questionTypes;
+            
+            return (isset($questionTypes[$this->questionType]) ? 
+                    $questionTypes[$this->questionType] : 
+                    '' );
+        }
+        
+        public function getIsCompulsoryText()
+        {
+            return ( $this->isCompulsory ) ? 'Yes' : 'No';
+        }
 }
