@@ -27,12 +27,12 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+			array('allow',  // allow all users to perform 'signup', 'index' and 'view' actions
+				'actions'=>array('signup'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('index','view', 'updateProfile', 'create', 'update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -78,6 +78,28 @@ class UserController extends Controller
 			'model'=>$model,
 		));
 	}
+
+        public function actionSignup()
+        {
+            if ( !Yii::app()->user->isGuest )
+                    $this->redirect(Yii::app()->user->returnUrl);
+            
+            $model = new User;
+            
+            // Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+            if(isset($_POST['User']))
+            {
+                    $model->attributes=$_POST['User'];
+                    if($model->save())
+                            $this->redirect(array('view','id'=>$model->id));
+            }
+
+            $this->render('signup',array(
+                    'model'=>$model,
+            ));
+        }
 
 	/**
 	 * Updates a particular model.
@@ -145,6 +167,28 @@ class UserController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        /**
+         * Updates the profile of currently signed in user.
+         */
+        public function actionUpdateProfile()
+        {
+                $model=$this->loadModel(Yii::app()->user->id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+        }
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
