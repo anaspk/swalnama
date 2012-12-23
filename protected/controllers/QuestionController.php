@@ -124,11 +124,17 @@ class QuestionController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($surveyId = 0)
 	{
-		$dataProvider=new CActiveDataProvider('Question');
+                if ( $surveyId == 0 )
+                    $this->redirect(array('site/index'));
+                
+		$model = new Question('search');
+                $model->unsetAttributes();
+                $model->surveyId = $surveyId;
+                
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

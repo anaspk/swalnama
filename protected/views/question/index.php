@@ -1,8 +1,9 @@
 <?php
 /* @var $this QuestionController */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $model Question */
 
 $this->breadcrumbs=array(
+        $model->survey->surveyName => array('survey/view', 'id'=>$model->survey->id),
 	'Questions',
 );
 
@@ -12,9 +13,27 @@ $this->menu=array(
 );
 ?>
 
-<h1>Questions</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
+<h2>Questions</h2>
+<?php $this->widget('bootstrap.widgets.TbButton', array(
+    'buttonType' => 'link',
+    'type' => 'success',
+    'label' => 'Add New Question',
+    'url' => CHtml::normalizeUrl(array('question/create', 'surveyId' => $model->survey->id)),
 )); ?>
+<?php 
+    $this->widget('bootstrap.widgets.TbGridView', array(
+        'dataProvider'=>$model->search(),
+        'filter'=>$model,
+        'type' => 'striped bordered',
+        'columns' => array(
+            'statement',
+            'questionTypeText',
+            'isCompulsoryText',
+            array(
+                'header' => Yii::t('ses', 'Administer'),
+                'class' => 'bootstrap.widgets.TbButtonColumn',
+                'template' => '{update} {delete}',
+            ),
+        ),
+    ));
+?>

@@ -132,6 +132,8 @@ class SurveyController extends Controller
 	{
 		$model = new Survey('search');
 		$model->unsetAttributes();  // clear any default values
+                $model->userId = Yii::app()->user->id;
+                
 		if(isset($_GET['Survey']))
 			$model->attributes=$_GET['Survey'];
                 $this->render('index',array(

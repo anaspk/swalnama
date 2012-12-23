@@ -122,6 +122,8 @@ class Survey extends CActiveRecord
 		$criteria->compare('creationDate',$this->creationDate,true);
 		$criteria->compare('publishDate',$this->publishDate,true);
 		$criteria->compare('endDate',$this->endDate,true);
+                $criteria->condition = 'userId=:user_id';
+                $criteria->params = array(':user_id'=>$this->userId);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
