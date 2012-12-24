@@ -22,7 +22,7 @@
         <div class="control-group">
             <label class="control-label" for="options[<?php echo $i; ?>]">Option <?php echo $i; ?></label>
             <div class="controls">
-                <input class="span8" type="text" id="options[<?php echo $i; ?>]" />
+                <input class="span8" type="text" name="options[<?php echo $i; ?>]" />
             </div>
         </div>
     <?php endfor; ?>

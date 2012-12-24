@@ -73,9 +73,29 @@ class QuestionController extends Controller
 
 		if(isset($_POST['Question']))
 		{
-			$model->attributes=$_POST['Question'];
-			if($model->save())
+                        $model->attributes=$_POST['Question'];
+			if($model->save() && $model->questionType == Question::TYPE_FREEANSWER)
+                        {
+                            // if it is not a multiple choice question then no further action is required.
+                            // so redirect now.
 				$this->redirect(array('view','id'=>$model->id));
+                        }
+                        
+                        if ($_POST['Question']['questionType'] == Question::TYPE_MULTIPLE)
+                        {
+                            foreach ($_POST['options'] as $optionStatement)
+                            {
+                                if ( strlen( trim($optionStatement) ) > 0  ) // if option statement is not an empty string
+                                {
+                                    $option = new Option();
+                                    $option->questionId = $model->id;
+                                    $option->optionStatement = $optionStatement;
+                                    $option->save();
+                                }
+                            }
+                            // Now that all options have been added, redirect
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(

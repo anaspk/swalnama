@@ -19,9 +19,9 @@ $(function() {
         $e.preventDefault();
         optionCount++;
         var $controlGroup = $('<div/>', {'class':'control-group'});
-        var $controlLabel = $('<label/>', {'class':'control-label', 'for':'options['+ optionCount + ']', 'text':'Option ' + optionCount});
+        var $controlLabel = $('<label/>', {'class':'control-label', 'for':'options[' + optionCount + ']', 'text':'Option ' + optionCount});
         var $controls = $('<div/>', {'class':'controls'});
-        var $input = $('<input/>', {'class':'span8', 'type':'text'})
+        var $input = $('<input/>', {'class':'span8', 'type':'text', 'name':'option[' + optionCount + ']'})
         $controls.append($input);
         $controlGroup.append($controlLabel);
         $controlGroup.append($controls);
