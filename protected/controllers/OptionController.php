@@ -84,23 +84,25 @@ class OptionController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Option']))
-		{
-			$model->attributes=$_POST['Option'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+	public function actionUpdate()
+	{   
+                $optionSaver = new TbEditableSaver('Option');
+                $optionSaver->update();
+//		$model=$this->loadModel($id);
+//
+//		// Uncomment the following line if AJAX validation is needed
+//		// $this->performAjaxValidation($model);
+//
+//		if(isset($_POST['Option']))
+//		{
+//			$model->attributes=$_POST['Option'];
+//			if($model->save())
+//				$this->redirect(array('view','id'=>$model->id));
+//		}
+//
+//		$this->render('update',array(
+//			'model'=>$model,
+//		));
 	}
 
 	/**
@@ -120,11 +122,18 @@ class OptionController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex( $questionId = 0 )
 	{
-		$dataProvider=new CActiveDataProvider('Option');
+            
+                if ( $questionId == 0 )
+                    $this->redirect(array('site/index'));
+                
+                $model=new Option('search');
+		$model->unsetAttributes();  // clear any default values
+		$model->questionId = $questionId;
+                
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

@@ -14,7 +14,20 @@ $this->menu=array(
 
 <h1>Options</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+        'dataProvider'=>$model->search(),
+        'filter'=>$model,
+        'type' => 'striped bordered',
+        'columns' => array(
+            array(
+                'class' => 'bootstrap.widgets.TbEditableColumn',
+                'name' => 'optionStatement',
+                'editable' => array(
+                    'url' => $this->createUrl('option/update'),
+                    'placement' => 'right',
+                    'inputclass' => 'span12',
+                ),
+            ),
+        ),
+    ));
+?>

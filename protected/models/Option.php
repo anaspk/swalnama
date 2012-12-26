@@ -86,6 +86,8 @@ class Option extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('questionId',$this->questionId);
 		$criteria->compare('optionStatement',$this->optionStatement,true);
+                $criteria->condition = 'questionId=:question_id';
+                $criteria->params = array( ':question_id' => $this->questionId );
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

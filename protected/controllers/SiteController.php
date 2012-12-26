@@ -82,28 +82,22 @@ class SiteController extends Controller
                 if ( !Yii::app()->user->isGuest )
                     $this->redirect(Yii::app()->user->returnUrl);
                 
-		$model=new LoginForm;
-
-		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-
-		// collect user input data
-		if(isset($_POST['LoginForm']))
-		{
-			$model->attributes=$_POST['LoginForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-                        {
-                        	$this->redirect(Yii::app()->user->returnUrl);
-                        }
-			
-		}
-		// display the login form
-		$this->render('login',array('model'=>$model));
+//		// if it is ajax validation request
+//		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+//		{
+//			echo CActiveForm::validate($model);
+//			Yii::app()->end();
+//		}
+            
+            $model = new LoginForm();
+            Yii::import( 'bootstrap.widgets.TbForm');
+            $form = TbForm::createForm( 'application.views.site.formConfigs.login', $model, array(
+                'type' => 'horizontal',
+            ) );
+            if ( $form->submitted('login') && $form->validate() && $model->login() )
+                $this->redirect( Yii::app()->user->returnUrl );
+            else
+                $this->render( 'login', array('form'=>$form) );
 	}
 
 	/**
