@@ -12,6 +12,4 @@ $this->menu=array(
 );
 ?>
 
-<h1>Sign Up</h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'primaryButtonLabel'=>'Sign Up')); ?>
+<?php echo $form; ?>

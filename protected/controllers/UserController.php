@@ -89,15 +89,19 @@ class UserController extends Controller
             // Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-            if(isset($_POST['User']))
+            Yii::import('bootstrap.widgets.TbForm');
+            $form = TbForm::createForm( 'application.views.user.formConfigs.signup', $model, array(
+                'type' => 'horizontal',
+            ) );
+            
+            if( $form->submitted() && $form->validate() )
             {
-                    $model->attributes=$_POST['User'];
                     if($model->save())
                             $this->redirect(array('view','id'=>$model->id));
             }
 
             $this->render('signup',array(
-                    'model'=>$model,
+                    'form'=>$form,
             ));
         }
 
