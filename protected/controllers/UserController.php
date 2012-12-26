@@ -94,7 +94,7 @@ class UserController extends Controller
                 'type' => 'horizontal',
             ) );
             
-            if( $form->submitted() && $form->validate() )
+            if( $form->submitted('signup') && $form->validate() )
             {
                     if($model->save())
                             $this->redirect(array('view','id'=>$model->id));

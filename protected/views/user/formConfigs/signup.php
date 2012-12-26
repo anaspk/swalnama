@@ -35,7 +35,7 @@
             ),
         ),
         'buttons' => array(
-            'submit' => array(
+            'signup' => array(
                 'type' => 'submit',
                 'layoutType' => 'primary',
                 'label' => 'Sign Up',
