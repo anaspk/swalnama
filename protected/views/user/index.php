@@ -28,7 +28,7 @@ $this->menu=array(
             array(
                 'header' => Yii::t('ses', 'Administer'),
                 'class' => 'bootstrap.widgets.TbButtonColumn',
-                'template' => '{view} {update} {delete}',
+                'template' => '{update} {delete}',
             ),
         ),
     ));

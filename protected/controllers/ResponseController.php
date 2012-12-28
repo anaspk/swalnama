@@ -4,15 +4,24 @@ class ResponseController extends Controller
 {
     public $layout='//layouts/column1';
     
-    public function filters() {
+    public function filters()
+    {
         return array(
-            
+            'accessControls',
+            'postOnly + delete',
         );
     }
     
-    public function accessRules() {
+    public function accessRules()
+    {
         return array(
-            
+                array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                        'actions'=>array('create', 'delete'),
+                        'users'=>array('@'),
+                ),
+                array('deny',  // deny all users
+                        'users'=>array('*'),
+                ),
         );
     }
     
@@ -38,6 +47,11 @@ class ResponseController extends Controller
             ) );
             $this->render( 'create', array('form' => $form) );
         }
+    }
+    
+    public function actionDelete()
+    {
+        
     }
 }
 ?>

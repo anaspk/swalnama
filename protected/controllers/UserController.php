@@ -32,28 +32,13 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','view', 'updateProfile', 'create', 'update'),
+				'actions'=>array('index','view', 'updateProfile', 'create', 'update', 'delete'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
-	}
-
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
 	}
 
 	/**
@@ -71,7 +56,7 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('create',array(
@@ -96,8 +81,8 @@ class UserController extends Controller
             
             if( $form->submitted('signup') && $form->validate() )
             {
-                    if($model->save())
-                            $this->redirect(array('view','id'=>$model->id));
+                    if($model->save(false)) // we have already validated the input
+                            $this->redirect(array('site/index'));
             }
 
             $this->render('signup',array(
@@ -121,11 +106,11 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model, 'primaryButtonLabel'=>'Update User', 
 		));
 	}
 
@@ -140,7 +125,7 @@ class UserController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 	}
 
 	/**
@@ -153,21 +138,6 @@ class UserController extends Controller
 		if(isset($_GET['User']))
 			$model->attributes=$_GET['User'];
                 $this->render('index',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new User('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
-
-		$this->render('admin',array(
 			'model'=>$model,
 		));
 	}
@@ -185,12 +155,11 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->save();
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model, 'primaryButtonLabel'=>'Update Profile',
 		));
         }
 
