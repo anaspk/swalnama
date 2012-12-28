@@ -101,4 +101,27 @@ class Answer extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getFormConfig()
+        {
+            $elements = array();
+            
+            if ( $this->question->questionType == Question::TYPE_FREEANSWER )
+            {
+                $elements['answerText'] = array(
+                    'type' => 'textarea',
+                );
+            }
+            else
+            {
+                
+            }
+            
+            return array(
+                'type' => 'form',
+                'title' => $this->question->statement,
+                'model' => $this,
+                'elements' => $elements,
+            );
+        }
 }

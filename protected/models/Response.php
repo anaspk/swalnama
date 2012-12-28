@@ -8,6 +8,7 @@
  * @property integer $userId
  * @property integer $surveyId
  * @property integer $status
+ * @property mixed[] $formConfig
  *
  * The followings are the available model relations:
  * @property Answer[] $answers
@@ -104,5 +105,39 @@ class Response extends CActiveRecord
         public function addAnswer( $questionId, $answer )
         {
             
+        }
+        
+        public function getFormConfig()
+        {
+            $elements = array();
+            $answers = array();
+            foreach ( $this->survey->questions as $question )
+            {
+                $answer = new Answer();
+                $answer->questionId = $question->id;
+                $answers[] = $answer;
+            }
+            
+            foreach ( $answers as $key => $answer )
+            {
+                $elements['answers[' . $key . ']'] = $answer->formConfig;
+            }
+            return array(
+                'title' => $this->survey->surveyName . ' - ' . count($elements),
+                'showErrorSummary' => true,
+                'elements' => $elements,
+                'buttons' => array(
+                    'Submit' => array(
+                        'type' => 'submit',
+                        'layoutType' => 'primary',
+                        'label' => 'Submit',
+                    ),
+                    'Save' => array(
+                        'type' => 'submit',
+                        'layoutType' => 'success',
+                        'label' => 'Save',
+                    ),
+                ),
+            );
         }
 }
