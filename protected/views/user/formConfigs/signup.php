@@ -42,7 +42,13 @@
             ),
             'reset' => array(
                 'type' => 'reset',
+                'layoutType' => 'warning',
                 'label' => 'Reset',
+            ),
+            'cancel' => array(
+                'type' => 'link',
+                'label' => 'Cancel',
+                'url' => CHtml::normalizeUrl( Yii::app()->user->returnUrl ),
             ),
         ),
     );

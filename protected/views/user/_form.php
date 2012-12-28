@@ -31,6 +31,16 @@
             'type' => 'primary',
             'label' => $primaryButtonLabel,
             ) ); ?>
+        <?php $this->widget( 'bootstrap.widgets.TbButton', array( 
+            'buttonType' => 'reset',
+            'type' => 'warning',
+            'label' => 'Reset',
+            ) ); ?>
+        <?php $this->widget( 'bootstrap.widgets.TbButton', array( 
+            'buttonType' => 'link',
+            'label' => 'Cancel',
+            'url' => $this->createUrl('index'),
+            ) ); ?>
 </div>
 
 <?php $this->endWidget(); ?>

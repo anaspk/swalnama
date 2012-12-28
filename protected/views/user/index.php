@@ -26,34 +26,10 @@ $this->menu=array(
             'firstName',
             'lastName',
             array(
-                'header' => Yii::t('ses', 'Administer'),
+                'header' => Yii::t('ses', 'Manage'),
                 'class' => 'bootstrap.widgets.TbButtonColumn',
                 'template' => '{update} {delete}',
             ),
         ),
     ));
-?>
-
-<?php
-// TbJsonGridView - not working yet - gives "paser error" in a JS alert on trigger
-//    $this->widget('bootstrap.widgets.TbJsonGridView', array(
-//        'dataProvider' => $model->search(),
-//        'filter' => $model,
-//        'type' => 'striped bordered condensed',
-//        'summaryText' => false,
-//        'cacheTTL' => 10, // cache will be stored 10 seconds (see cacheTTLType)
-//        'cacheTTLType' => 's', // type can be of seconds, minutes or hours
-//        'columns' => array(
-//            'id',
-//            'username',
-//            'emailAddress',
-//            'firstName',
-//            'lastName',
-//            array(
-//                'header' => Yii::t('ses', 'Edit'),
-//                'class' => 'bootstrap.widgets.TbJsonButtonColumn',
-//                'template' => '{view}',
-//            ),
-//        ),
-//    ));
 ?>

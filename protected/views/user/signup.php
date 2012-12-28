@@ -12,4 +12,4 @@ $this->menu=array(
 );
 ?>
 
-<?php echo $form; ?>
+<?php echo $form->render(); ?>
