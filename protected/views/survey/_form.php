@@ -13,7 +13,7 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-<?php echo $form->textFieldRow($model, 'surveyName', array('maxlength'=>45)); ?>
+<?php echo $form->textFieldRow($model, 'surveyName', array('class'=>'span12', 'maxlength'=>45)); ?>
 <?php echo $form->textAreaRow($model, 'surveyDescription', array('class'=>'span12', 'rows'=>4, 'maxlength'=>255)); ?>
 <?php echo $form->html5EditorRow($model, 'welcomeMessage', array('height'=>'200px')); ?>
 <?php echo $form->html5EditorRow($model, 'goodbyeMessage', array('height'=>'200px')); ?>
@@ -35,6 +35,16 @@ if ( !$model->isNewRecord )
             'buttonType' => 'submit',
             'type' => 'primary',
             'label' => $model->isNewRecord ? 'Create' : 'Update',
+            ) ); ?>
+    <?php $this->widget( 'bootstrap.widgets.TbButton', array( 
+            'buttonType' => 'reset',
+            'type' => 'warning',
+            'label' => 'Reset',
+            ) ); ?>
+    <?php $this->widget( 'bootstrap.widgets.TbButton', array( 
+            'buttonType' => 'link',
+            'url' => $this->createUrl('index'),
+            'label' => 'Cancel',
             ) ); ?>
 </div>
 

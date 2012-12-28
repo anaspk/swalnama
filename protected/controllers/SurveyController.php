@@ -75,7 +75,7 @@ class SurveyController extends Controller
                         $model->creationDate = new CDbExpression('NOW()');
                         
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('question/create','surveyId'=>$model->id));
 		}
 
 		$this->render('create',array(
