@@ -30,7 +30,7 @@ $this->menu=array(
             'questionTypeText',
             'isCompulsoryText',
             array(
-                'header' => Yii::t('ses', 'Administer'),
+                'header' => Yii::t('ses', 'Manage'),
                 'class' => 'bootstrap.widgets.TbButtonColumn',
                 'template' => '{update} {delete}',
             ),

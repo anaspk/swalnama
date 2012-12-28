@@ -78,7 +78,7 @@ class QuestionController extends Controller
                         {
                             // if it is not a multiple choice question then no further action is required.
                             // so redirect now.
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('create','surveyId'=>$model->survey->id));
                         }
                         
                         if ($_POST['Question']['questionType'] == Question::TYPE_MULTIPLE)
@@ -94,7 +94,7 @@ class QuestionController extends Controller
                                 }
                             }
                             // Now that all options have been added, redirect
-                            $this->redirect(array('view','id'=>$model->id));
+                            $this->redirect(array('create','surveyId'=>$model->survey->id));
                         }
 		}
 

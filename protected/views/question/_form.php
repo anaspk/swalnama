@@ -45,6 +45,11 @@
             'type'=>'primary',
             'label'=>'Add Question',
         )); ?>
+    <?php $this->widget('bootstrap.widgets.TbButton', array(
+            'buttonType'=>'link',
+            'url' => $this->createUrl('question/index', array('surveyId'=>$model->survey->id)),
+            'label'=>'Cancel',
+        )); ?>
 </div>
 
 <?php $this->endWidget(); ?>
