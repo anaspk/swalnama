@@ -76,7 +76,7 @@ class Answer extends CActiveRecord
                         'responseId' => 'Response',
 			'questionId' => 'Question',
 			'answerChoice' => 'Answer Choice',
-			'answerText' => 'Answer Text',
+			'answerText' => 'Answer',
 		);
 	}
 
@@ -114,12 +114,14 @@ class Answer extends CActiveRecord
             }
             else
             {
-                
+                $elements['answerChoice'] = array(
+                    'type' => $this->question->multipleChoiceAllowed ? 'checkboxlist': 'radiolist',
+                    'items' => $this->question->optionsList,
+                );
             }
             
             return array(
                 'type' => 'form',
-                'title' => $this->question->statement,
                 'model' => $this,
                 'elements' => $elements,
             );

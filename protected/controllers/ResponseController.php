@@ -34,7 +34,7 @@ class ResponseController extends Controller
             
             Yii::import('bootstrap.widgets.TbForm');
             $form = TbForm::createForm( $model->formConfig, $model, array(
-                'type' => 'horizontal',
+                'type' => 'horizontal', 'htmlOptions' => array( 'class' => 'well' ),
             ) );
             $this->render( 'create', array('form' => $form) );
         }

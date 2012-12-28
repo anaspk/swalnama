@@ -118,12 +118,13 @@ class Response extends CActiveRecord
                 $answers[] = $answer;
             }
             
-            foreach ( $answers as $key => $answer )
+            foreach ( $answers as $answer )
             {
-                $elements['answers[' . $key . ']'] = $answer->formConfig;
+                $elements[] = $answer->question->statement;
+                $elements[] = $answer->formConfig;
             }
             return array(
-                'title' => $this->survey->surveyName . ' - ' . count($elements),
+                'title' => $this->survey->surveyName,
                 'showErrorSummary' => true,
                 'elements' => $elements,
                 'buttons' => array(

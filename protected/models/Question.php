@@ -8,8 +8,8 @@
  * @property integer $surveyId
  * @property string $statement
  * @property integer $questionType
- * @property integer $multipleChoiceAllowed
- * @property integer $isCompulsory
+ * @property boolean $multipleChoiceAllowed
+ * @property boolean $isCompulsory
  *
  * The followings are the available model relations:
  * @property Option[] $options
@@ -131,5 +131,15 @@ class Question extends CActiveRecord
         public function getIsCompulsoryText()
         {
             return ( $this->isCompulsory ) ? 'Yes' : 'No';
+        }
+        
+        public function getOptionsList()
+        {
+            $optionsList = array();
+            foreach( $this->options as $option )
+            {
+                $optionsList[$option->id] = $option->optionStatement;
+            }
+            return $optionsList;
         }
 }
