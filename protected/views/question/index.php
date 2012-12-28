@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
         $model->survey->surveyName => array('survey/view', 'id'=>$model->survey->id),
-	'Questions',
+	'Manage Questions',
 );
 
 $this->menu=array(
@@ -13,13 +13,16 @@ $this->menu=array(
 );
 ?>
 
-<h2>Questions</h2>
-<?php $this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType' => 'link',
-    'type' => 'success',
-    'label' => 'Add New Question',
-    'url' => CHtml::normalizeUrl(array('question/create', 'surveyId' => $model->survey->id)),
-)); ?>
+<h2><?php echo $model->survey->surveyName; ?></h2>
+<div class="well well-small">
+    <?php $this->widget('bootstrap.widgets.TbButton', array(
+        'buttonType' => 'link',
+        'type' => 'success',
+        'label' => 'Add New Question',
+        'url' => CHtml::normalizeUrl(array('question/create', 'surveyId' => $model->survey->id)),
+    )); ?>
+</div>
+<h3>Manage Questions</h3>
 <?php 
     $this->widget('bootstrap.widgets.TbGridView', array(
         'dataProvider'=>$model->search(),
