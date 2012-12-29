@@ -5,7 +5,11 @@
     <style type="text/css">
         body {
             padding-top: 60px;
-            padding-bottom: 40px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+        footer {
+            text-align: center;
         }
     </style>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -64,13 +68,14 @@
 
     <?php echo $content; ?>
 
-    <div id="footer">
+</div><!-- page -->
+<footer class="footer">
+    <div class="container-fluid well">
             Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
             All Rights Reserved.<br/>
             <?php echo Yii::powered(); ?>
     </div><!-- footer -->
-
-</div><!-- page -->
+</footer>
 
 </body>
 </html>
