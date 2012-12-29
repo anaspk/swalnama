@@ -32,11 +32,11 @@ class SurveyController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','delete','publish'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -102,8 +102,7 @@ class SurveyController extends Controller
                             $model->publishDate = new CDbExpression ('NOW()');
                         
 			$model->attributes=$_POST['Survey'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->save();
 		}
 
 		$this->render('update',array(
@@ -156,6 +155,17 @@ class SurveyController extends Controller
 		));
 	}
 
+        /**
+         * Sets the status of a particular survey to Survey::STATUS_PUBLISHED
+         */
+        public function actionPublish($id)
+        {
+            Survey::model()->updateByPk($id,
+                    array('status'=>Survey::STATUS_PUBLISHED),
+                    'id=:id', array(':id'=>$id));
+            $this->redirect( Yii::app()->request->urlReferrer );
+        }
+        
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

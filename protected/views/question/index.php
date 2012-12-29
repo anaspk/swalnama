@@ -14,14 +14,16 @@ $this->menu=array(
 ?>
 
 <h2><?php echo $model->survey->surveyName; ?></h2>
-<div class="well well-small">
-    <?php $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'link',
-        'type' => 'success',
-        'label' => 'Add New Question',
-        'url' => CHtml::normalizeUrl(array('question/create', 'surveyId' => $model->survey->id)),
-    )); ?>
-</div>
+<?php if ($model->survey->status != Survey::STATUS_PUBLISHED): ?>
+    <div class="well well-small">
+        <?php $this->widget('bootstrap.widgets.TbButton', array(
+            'buttonType' => 'link',
+            'type' => 'success',
+            'label' => 'Add New Question',
+            'url' => CHtml::normalizeUrl(array('question/create', 'surveyId' => $model->survey->id)),
+        )); ?>
+    </div>
+<?php endif; ?>
 <h3>Manage Questions</h3>
 <?php 
     $this->widget('bootstrap.widgets.TbGridView', array(

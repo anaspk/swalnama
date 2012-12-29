@@ -42,7 +42,7 @@
 
 <div class="container-fluid">
     <?php $this->widget('bootstrap.widgets.TbNavbar', array(
-        'type'=>'inverse',
+        //'type'=>'inverse',
         'brand'=>'OpenSurvey',
         'brandUrl'=>Yii::app()->request->baseUrl,
         'collapse'=>true,

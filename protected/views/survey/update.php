@@ -17,6 +17,7 @@ $this->menu=array(
 ?>
 
 <h1>Update Survey - <?php echo $model->surveyName; ?></h1>
+<?php if ( $model->status != Survey::STATUS_PUBLISHED ): ?>
 <div class="well well-small">
     <?php
         $this->widget('bootstrap.widgets.TbButton', array(
@@ -24,8 +25,19 @@ $this->menu=array(
             'type' => 'success',
             'url' => $this->createUrl( 'question/index', array( 'surveyId'=>$model->id ) ),
             'label' => 'Manage Questions',
-            //'size' => 'large',
         ) );
     ?>
+    <?php
+        if ( count($model->questions) >= 1 )
+        {
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType' => 'link',
+                'type' => 'success',
+                'url' => $this->createUrl( 'survey/publish', array( 'id'=>$model->id ) ),
+                'label' => 'Publish Survey',
+            ) );
+        }
+    ?>
 </div>
+<?php endif; ?>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

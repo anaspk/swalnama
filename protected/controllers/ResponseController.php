@@ -7,7 +7,7 @@ class ResponseController extends Controller
     public function filters()
     {
         return array(
-            'accessControls',
+            'accessControl',
             'postOnly + delete',
         );
     }
