@@ -33,8 +33,9 @@
         $navbarRightEntries['items'] = array(
                     array('label'=>'Welcome, ' . Yii::app()->user->name, 'url'=>CHtml::normalizeUrl(''),
                         'items'=>array(
-                            
+                            array('label'=>'Dashboard','url'=>CHtml::normalizeUrl(array('site/dashboard'))),
                             array('label'=>'Update Profile', 'url'=>CHtml::normalizeUrl(array('user/updateProfile'))),
+                            '',
                             array('label'=>'Logout', 'url'=>CHtml::normalizeUrl(array('site/logout'))),
             )));
     }

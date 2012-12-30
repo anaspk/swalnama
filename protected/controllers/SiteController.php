@@ -27,12 +27,24 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
+		if ( !Yii::app()->user->isGuest )
+                    $this->redirect(array('dashboard'));
+                
                 $this->layout = 'home';
                 $this->render('index');
 	}
 
+        public function actionDashboard()
+        {
+            if ( Yii::app()->user->isGuest )
+                $this->redirect(array('index'));
+            
+            $surveys = Survey::model()->findAll('userId=:userId', array('userId'=>Yii::app()->user->id));
+            $users = User::model()->findAll();
+                
+            $this->layout = 'column2';
+            $this->render('dashboard', array('users'=>$users, 'surveys'=>$surveys));
+        }
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -80,7 +92,7 @@ class SiteController extends Controller
 	{
                 //first of all check if the user is already signed in or not
                 if ( !Yii::app()->user->isGuest )
-                    $this->redirect(Yii::app()->user->returnUrl);
+                    $this->redirect(array('dashboard'));
                 
 //		// if it is ajax validation request
 //		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -95,7 +107,7 @@ class SiteController extends Controller
                 'type' => 'horizontal',
             ) );
             if ( $form->submitted('login') && $form->validate() && $model->login() )
-                $this->redirect( Yii::app()->user->returnUrl );
+                $this->redirect( array('dashboard') );
             else
                 $this->render( 'login', array('form'=>$form) );
 	}
