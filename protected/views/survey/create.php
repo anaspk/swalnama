@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Survey', 'url'=>array('index')),
-	array('label'=>'Manage Survey', 'url'=>array('admin')),
+	array('label'=>'List Surveys', 'url'=>array('index')),
+	array('label'=>'Create New Survey', 'url'=>array('create'), 'itemOptions'=>array('class'=>'active')),
 );
 ?>
 

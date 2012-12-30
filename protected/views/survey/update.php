@@ -9,10 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Survey', 'url'=>array('index')),
-	array('label'=>'Create Survey', 'url'=>array('create')),
-	array('label'=>'View Survey', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Survey', 'url'=>array('admin')),
+	array('label'=>'List Surveys', 'url'=>array('index')),
+        array('label'=>'Delete Survey', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this survey?')),
+	array('label'=>'Create New Survey', 'url'=>array('create')),
 );
 ?>
 

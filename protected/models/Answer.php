@@ -110,6 +110,7 @@ class Answer extends CActiveRecord
             {
                 $elements['answerText'] = array(
                     'type' => 'textarea',
+                    'class' => 'span8'
                 );
             }
             else

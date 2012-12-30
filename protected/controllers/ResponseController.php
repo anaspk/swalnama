@@ -27,20 +27,25 @@ class ResponseController extends Controller
     
     public function actionCreate( $surveyId = 0 )
     {
+        if ( Yii::app()->user->isGuest )
+        {
+            $this->redirect( Yii::app()->homeUrl );
+        }
+        
         if ( $surveyId == 0 )
         {
             $this->redirect(array('site/index'));
         }
-        
+
         $survey = Survey::model()->findByPk( $surveyId );
-        
+
         if ( !is_null( $survey ) )
         {
             $model = new Response;
             $model->surveyId = $surveyId;
             $model->userId = Yii::app()->user->id;
             $model->status = Response::STATUS_STARTED;
-            
+
             Yii::import('bootstrap.widgets.TbForm');
             $form = TbForm::createForm( $model->formConfig, $model, array(
                 'type' => 'horizontal', 'htmlOptions' => array( 'class' => 'well' ),
