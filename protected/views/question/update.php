@@ -9,10 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Question', 'url'=>array('index')),
-	array('label'=>'Create Question', 'url'=>array('create')),
-	array('label'=>'View Question', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Question', 'url'=>array('admin')),
+	array('label'=>'List Questions', 'url'=>array('index', 'surveyId'=>$model->surveyId)),
+	array('label'=>'Add New Question', 'url'=>array('create', 'surveyId'=>$model->surveyId)),
+        array('label'=>'Delete Question', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this Question?')),
 );
 ?>
 

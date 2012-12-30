@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Question', 'url'=>array('index')),
-	array('label'=>'Manage Question', 'url'=>array('admin')),
+	array('label'=>'List Questions', 'url'=>array('index', 'surveyId'=>$model->surveyId)),
+	array('label'=>'Add New Question', 'url'=>array('create', 'surveyId'=>$model->surveyId), 'itemOptions'=>array('class'=>'active')),
 );
 ?>
 
