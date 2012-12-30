@@ -3,7 +3,7 @@
 /* @var $model Question */
 
 $this->breadcrumbs=array(
-        $model->survey->surveyName => array('survey/view', 'id'=>$model->survey->id),
+        $model->survey->surveyName => array('survey/update', 'id'=>$model->survey->id),
 	'Manage Questions',
 );
 

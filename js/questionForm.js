@@ -21,7 +21,7 @@ $(function() {
         var $controlGroup = $('<div/>', {'class':'control-group'});
         var $controlLabel = $('<label/>', {'class':'control-label', 'for':'options[' + optionCount + ']', 'text':'Option ' + optionCount});
         var $controls = $('<div/>', {'class':'controls'});
-        var $input = $('<input/>', {'class':'span8', 'type':'text', 'name':'option[' + optionCount + ']'})
+        var $input = $('<input/>', {'class':'span8', 'type':'text', 'name':'options[' + optionCount + ']'});
         $controls.append($input);
         $controlGroup.append($controlLabel);
         $controlGroup.append($controls);
