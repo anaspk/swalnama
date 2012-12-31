@@ -3,37 +3,34 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
-<?php $this->widget('bootstrap.widgets.TbCarousel', array(
-    'items'=>array(
-        array('image'=>'http://placehold.it/770x400&text=First+thumbnail',
-            'label'=>'First Thumbnail label',
-            'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit
-                non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'
-            ),
-        array('image'=>'http://placehold.it/770x400&text=Second+thumbnail',
-            'label'=>'Second Thumbnail label',
-            'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit
-                non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'
-            ),
-        array('image'=>'http://placehold.it/770x400&text=Third+thumbnail',
-            'label'=>'Third Thumbnail label',
-            'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
-                porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
-    ),
-)); ?>
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-<?php if (!Yii::app()->user->isGuest): ?>
-<p>Thanks for signing in!</p>
-<p>Your user Id is <?php echo CHtml::encode(Yii::app()->user->id); ?>, username is <?php
-echo CHtml::encode(Yii::app()->user->name); ?> and your full name is '<?php echo CHtml::encode(Yii::app()->user->fullName); ?>'</p>
-<?php endif; ?>
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
+<div class="row-fluid">
+    <div class="span8">
+        <div class="hero-unit">
+            <h1>Welcome</h1>
+            <h2>To OpenSurvey</h2>
+            <p>A free and open solution to all your surveying and response collection needs.</p>
+            <a href="<?php echo CHtml::normalizeUrl(array('user/signup')); ?>" class="btn btn-primary btn-large">Get Started Now ...</a>
+        </div>
+    </div><!-- span8 -->
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+    <div class="span4">
+        <div class="well" id="home-sidebar">
+            <p>
+                Already have an account?
+            </p>
+            <a href="<?php echo CHtml::normalizeUrl(array('site/login')); ?>" class="btn btn-large btn-success">Sign In</a>
+            <br /><br /><i class="icon-arrow-up"></i>
+            <hr />
+            <i class="icon-arrow-down"></i>
+            <p>
+                Don't have an account yet?
+            </p>
+            <a href="<?php echo CHtml::normalizeUrl(array('user/signup')); ?>" class="btn btn-large btn-primary">Sign Up</a>
+        </div>
+    </div><!-- span4 -->
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        
+    </div><!-- span12 -->
+</div>

@@ -30,7 +30,7 @@ class SiteController extends Controller
 		if ( !Yii::app()->user->isGuest )
                     $this->redirect(array('dashboard'));
                 
-                $this->layout = 'home';
+                $this->layout = 'index';
                 $this->render('index');
 	}
 

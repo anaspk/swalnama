@@ -85,6 +85,7 @@ class UserController extends Controller
                             $this->redirect(array('site/index'));
             }
 
+            $this->layout = 'column1';
             $this->render('signup',array(
                     'form'=>$form,
             ));

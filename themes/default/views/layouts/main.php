@@ -11,6 +11,9 @@
         footer {
             text-align: center;
         }
+        #home-sidebar {
+            text-align: center;
+        }
     </style>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
