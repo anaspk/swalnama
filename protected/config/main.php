@@ -58,10 +58,10 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=opensurvey',
+			'connectionString' => 'mysql:host=localhost;dbname=swalnama',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'mysqlpass',
+			'password' => 'anaspass',
 			'charset' => 'utf8',
 		),
 		
