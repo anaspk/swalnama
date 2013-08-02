@@ -36,7 +36,7 @@ class TbDatePicker extends CInputWidget
 
 		if (!isset($this->options['format']))
 			$this->options['format'] = 'mm/dd/yyyy';
-                
+
 		if (!isset($this->options['weekStart']))
 			$this->options['weekStart'] = 0; // Sunday
 	}
