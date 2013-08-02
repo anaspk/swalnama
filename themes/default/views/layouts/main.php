@@ -1,85 +1,59 @@
 <?php /* @var $this Controller */ ?>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 0px;
-            margin-bottom: 0px;
-        }
-        footer {
-            text-align: center;
-        }
-        #home-sidebar {
-            text-align: center;
-        }
-    </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+
+	<!-- blueprint CSS framework -->
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
-<?php
-    $navbarRightEntries = array( // configure any common settings here
-        'class'=>'bootstrap.widgets.TbMenu',
-        'htmlOptions'=>array('class'=>'pull-right'),
-    );
-    if ( Yii::app()->user->isGuest )
-    {
-        $navbarRightEntries['items'] = array(
-                    array('label'=>'Sign Up', 'url'=>CHtml::normalizeUrl(array('user/signup'))),
-                    array('label'=>'Login', 'url'=>CHtml::normalizeUrl(array('site/login'))),
-            );
-    }
-    else
-    {
-        $navbarRightEntries['items'] = array(
-                    array('label'=>'Welcome, ' . Yii::app()->user->name, 'url'=>CHtml::normalizeUrl(''),
-                        'items'=>array(
-                            array('label'=>'Dashboard','url'=>CHtml::normalizeUrl(array('site/dashboard'))),
-                            array('label'=>'Update Profile', 'url'=>CHtml::normalizeUrl(array('user/updateProfile'))),
-                            '',
-                            array('label'=>'Logout', 'url'=>CHtml::normalizeUrl(array('site/logout'))),
-            )));
-    }
-?>
 
-<div class="container-fluid">
-    <?php $this->widget('bootstrap.widgets.TbNavbar', array(
-        //'type'=>'inverse',
-        'brand'=>'OpenSurvey',
-        'brandUrl'=>Yii::app()->request->baseUrl,
-        'collapse'=>true,
-        'items'=>array(
-            array(
-                'class'=>'bootstrap.widgets.TbMenu',
-                'items'=>array(
-                    array('label'=>'Home', 'url'=>CHtml::normalizeUrl(array('site/index'))),
-                    array('label'=>'About', 'url'=>CHtml::normalizeUrl(array('site/page', 'view'=>'about'))),
-                    array('label'=>'Contact', 'url'=>CHtml::normalizeUrl(array('site/contact'))),
-                ),
-            ),
-            $navbarRightEntries, // login/sign up or account management links depending upon
-                            // whether the current user is signed in or not
-        ),
-    ));
-    ?>
-    <?php if(isset($this->breadcrumbs)):?>
-            <?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-                    'links'=>$this->breadcrumbs,
-            )); ?>
-    <?php endif?><!-- breadcrumbs -->
+<div class="container" id="page">
 
-    <?php echo $content; ?>
+	<div id="header">
+		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+	</div><!-- header -->
+
+	<div id="mainmenu">
+		<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			),
+		)); ?>
+	</div><!-- mainmenu -->
+	<?php if(isset($this->breadcrumbs)):?>
+		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+			'links'=>$this->breadcrumbs,
+		)); ?><!-- breadcrumbs -->
+	<?php endif?>
+
+	<?php echo $content; ?>
+
+	<div class="clear"></div>
+
+	<div id="footer">
+		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		All Rights Reserved.<br/>
+		<?php echo Yii::powered(); ?>
+	</div><!-- footer -->
 
 </div><!-- page -->
-<footer class="footer">
-    <div class="container-fluid well">
-            Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-            All Rights Reserved.<br/>
-            <?php echo Yii::powered(); ?>
-    </div><!-- footer -->
-</footer>
 
 </body>
 </html>

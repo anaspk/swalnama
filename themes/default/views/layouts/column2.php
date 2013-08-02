@@ -1,24 +1,22 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
-<div class="row-fluid">
-    <div class="span9">
-            <?php echo $content; ?>
-    </div><!-- content -->
-
-    <div class="span3">
-        <div id="sidebar">
-        <?php
-            if ( !( count($this->menu) == 0 ) )
-            {
-                array_unshift($this->menu, array('label'=>'Operations', 'itemOptions'=>array('class'=>'nav-header'))); 
-                $this->widget('bootstrap.widgets.TbMenu', array(
-                        'type'=>'list',
-                        'items'=>$this->menu,
-                        'htmlOptions'=>array('class'=>'well well-small'),
-                ));
-            }
-        ?>
-        </div><!-- sidebar -->
-    </div>
+<div class="span-19">
+	<div id="content">
+		<?php echo $content; ?>
+	</div><!-- content -->
+</div>
+<div class="span-5 last">
+	<div id="sidebar">
+	<?php
+		$this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Operations',
+		));
+		$this->widget('zii.widgets.CMenu', array(
+			'items'=>$this->menu,
+			'htmlOptions'=>array('class'=>'operations'),
+		));
+		$this->endWidget();
+	?>
+	</div><!-- sidebar -->
 </div>
 <?php $this->endContent(); ?>
