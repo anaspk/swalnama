@@ -3,17 +3,16 @@
 /* @var $model Question */
 
 $this->breadcrumbs=array(
-	$model->survey->surveyName => array('question/index', 'surveyId'=>$model->survey->id),
-	'Add New Question',
+	'Questions'=>array('index'),
+	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Questions', 'url'=>array('index', 'surveyId'=>$model->surveyId)),
-	array('label'=>'Add New Question', 'url'=>array('create', 'surveyId'=>$model->surveyId), 'itemOptions'=>array('class'=>'active')),
+	array('label'=>'List Question', 'url'=>array('index')),
+	array('label'=>'Manage Question', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Survey - <?php echo $model->survey->surveyName; ?></h1>
-<h2>Add New Question</h2>
+<h1>Create Question</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

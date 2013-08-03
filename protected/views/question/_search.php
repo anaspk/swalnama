@@ -37,8 +37,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'isCompusory'); ?>
-		<?php echo $form->textField($model,'isCompusory'); ?>
+		<?php echo $form->label($model,'isCompulsory'); ?>
+		<?php echo $form->textField($model,'isCompulsory'); ?>
 	</div>
 
 	<div class="row buttons">
