@@ -13,13 +13,13 @@ $this->menu = array(
     array('label'=>'Manage Users', 'url'=>array('user/index')),
     '',
     array('label'=>'Update Profile', 'url'=>array('user/updateProfile')),
-    array('label'=>'logout', 'url'=>array('site/logout')),
+    array('label'=>'Logout', 'url'=>array('site/logout')),
 );
 ?>
 <h1>Welcome to Open Survey</h1>
 <p>Thanks for logging in!</p>
 <h2>Surveys</h2>
-<table class="table table-striped table-bordered">
+<table class="table">
     <tr>
         <th>Survey Name</th><th>Status</th><th>Privacy Level</th>
     </tr>
@@ -38,7 +38,7 @@ $this->menu = array(
     ?>
 </table>
 <h2>Users</h2>
-<table class="table table-striped table-bordered">
+<table class="table">
     <tr>
         <th>Username</th><th>Email Address</th><th>First Name</th><th>Last Name</th>
     </tr>
